@@ -1,47 +1,163 @@
 package com.practicum.playlist_maker_android_sazonenkodmitriy
 
+import android.content.Intent
 import android.os.Bundle
+import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.activity.enableEdgeToEdge
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.Scaffold
+import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.filled.KeyboardArrowRight
+import androidx.compose.material.icons.filled.FavoriteBorder
+import androidx.compose.material.icons.filled.LibraryMusic
+import androidx.compose.material.icons.filled.List
+import androidx.compose.material.icons.filled.Search
+import androidx.compose.material.icons.filled.Settings
+import androidx.compose.material3.Icon
+import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.colorResource
+import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.font.FontFamily
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
-import com.practicum.playlist_maker_android_sazonenkodmitriy.ui.theme.PlaylistmakerandroidSazonenkoDmitriyTheme
+import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
+import androidx.compose.ui.text.font.Font
+
+val mainFont = FontFamily(
+    Font(R.font.ys_display_medium, FontWeight.Medium)
+)
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
         setContent {
-            PlaylistmakerandroidSazonenkoDmitriyTheme {
-                Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    Greeting(
-                        name = "Android",
-                        modifier = Modifier.padding(innerPadding)
-                    )
-                }
+            MainScreen()
+        }
+    }
+}
+
+@Composable
+fun MainScreen() {
+    val context = LocalContext.current
+
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+            .background(colorResource(R.color.main_screen_background))
+    ) {
+        Text(
+            text = stringResource(R.string.main_screen_name),
+            color = colorResource(R.color.white),
+
+            fontSize = 22.sp,
+            fontFamily = mainFont,
+            fontWeight = FontWeight.Medium,
+
+            modifier = Modifier
+                .padding(top = 4.dp, start = 16.dp, bottom = 18.dp)
+                .fillMaxWidth()
+                .height(48.dp)
+                .wrapContentHeight(Alignment.CenterVertically)
+        )
+
+        Surface(
+            modifier = Modifier
+                .fillMaxSize(),
+            color = colorResource(R.color.background),
+            shape = RoundedCornerShape(topStart = 16.dp, topEnd = 16.dp)
+        ) {
+            Column(
+                modifier = Modifier
+                    .padding(top = 8.dp, start = 16.dp, end = 16.dp)
+                    .fillMaxSize()
+            ) {
+                MenuItem(
+                    text = stringResource(R.string.main_screen_find),
+                    icon = Icons.Default.Search,
+                    onClick = {
+                        context.startActivity(Intent(context, SearchActivity::class.java))
+                    }
+                )
+                MenuItem(
+                    text = stringResource(R.string.main_screen_playlist),
+                    icon = Icons.Default.LibraryMusic,
+                    onClick = {
+                        Toast.makeText(context, "Тут пока ничего", Toast.LENGTH_SHORT).show()
+                    }
+                )
+                MenuItem(
+                    text = stringResource(R.string.main_screen_favorite),
+                    icon = Icons.Default.FavoriteBorder,
+                    onClick = {
+                        Toast.makeText(context, "Тут тоже", Toast.LENGTH_SHORT).show()
+                    }
+                )
+                MenuItem(
+                    text = stringResource(R.string.main_screen_settings),
+                    icon = Icons.Default.Settings,
+                    onClick = {
+                        context.startActivity(Intent(context, SettingsActivity::class.java))
+                    }
+                )
             }
         }
     }
 }
 
 @Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
-    Text(
-        text = "Hello $name!",
-        modifier = modifier
-    )
+fun MenuItem(
+    text: String,
+    icon: ImageVector,
+    onClick: () -> Unit
+) {
+    Row(
+        // тут padding первой строчкой нельзя, а то неудобно кликать будет (padding не войдет в clickable-область)
+        modifier = Modifier
+            .fillMaxWidth()
+            .clickable { onClick() }
+            .padding(horizontal = 16.dp, vertical = 16.dp)
+            .height(40.dp),
+        verticalAlignment = Alignment.CenterVertically
+    ) {
+        Icon(
+            imageVector = icon,
+            contentDescription = null,
+            tint = colorResource(R.color.main_text),
+            modifier = Modifier.size(24.dp)
+        )
+        Spacer(modifier = Modifier.width(8.dp))
+        Text(
+            text = text,
+            color = colorResource(R.color.main_text),
+
+            fontSize = 22.sp,
+            fontFamily = mainFont,
+            fontWeight = FontWeight.Medium,
+
+            modifier = Modifier.weight(1f)
+        )
+        Icon(
+            imageVector = Icons.AutoMirrored.Filled.KeyboardArrowRight,
+            contentDescription = null,
+            tint = colorResource(R.color.arrow),
+            modifier = Modifier.size(24.dp)
+        )
+    }
 }
 
 @Preview(showBackground = true)
 @Composable
-fun GreetingPreview() {
-    PlaylistmakerandroidSazonenkoDmitriyTheme {
-        Greeting("Android")
-    }
+fun PlaylistMakerScreenPreview() {
+    MainScreen()
 }

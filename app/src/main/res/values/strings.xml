@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">playlist-maker-android-SazonenkoDmitriy</string>
+    <string name="main_screen_name">Playlist Maker </string>
+    <string name="main_screen_find">Поиск</string>
+    <string name="main_screen_playlist">Плейлисты</string>
+    <string name="main_screen_favorite">Избранное</string>
+    <string name="main_screen_settings">Настройки</string>
 </resources>

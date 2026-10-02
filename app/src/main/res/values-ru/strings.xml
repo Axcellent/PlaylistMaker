@@ -5,4 +5,16 @@
     <string name="main_screen_playlist">Плейлисты</string>
     <string name="main_screen_favorite">Избранное</string>
     <string name="main_screen_settings">Настройки</string>
+    <string name="search_screen_name">Поиск</string>
+    <string name="search_hint">Поиск</string>
+    <string name="settings_screen_name">Настройки</string>
+    <string name="settings_dark_theme">Тёмная тема</string>
+    <string name="settings_share">Поделиться приложением</string>
+    <string name="settings_support">Написать в поддержку</string>
+    <string name="settings_terms">Пользовательское соглашение</string>
+    <string name="settings_share_url">https://practicum.yandex.ru/android-developer/</string>
+    <string name="settings_email">student@example.com</string>
+    <string name="settings_email_header">Сообщение разработчикам и разработчицам приложения Playlist Maker</string>
+    <string name="settings_email_body">Спасибо разработчикам и разработчицам за крутое приложение!</string>
+    <string name="settings_terms_url">https://yandex.ru/legal/practicum_offer/</string>
 </resources>

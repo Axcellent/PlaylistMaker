@@ -1,6 +1,5 @@
 package com.practicum.playlist_maker_android_sazonenkodmitriy
 
-import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
 import androidx.activity.ComponentActivity
@@ -13,26 +12,30 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.KeyboardArrowRight
 import androidx.compose.material.icons.filled.FavoriteBorder
 import androidx.compose.material.icons.filled.LibraryMusic
-import androidx.compose.material.icons.filled.List
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.material.icons.filled.Settings
 import androidx.compose.material3.Icon
-import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.compose.ui.text.font.Font
+import androidx.navigation.compose.rememberNavController
+
+enum class Screen {
+    MAIN,
+    SEARCH,
+    SETTINGS
+}
 
 val mainFont = FontFamily(
     Font(R.font.ys_display_medium, FontWeight.Medium)
@@ -41,14 +44,19 @@ val mainFont = FontFamily(
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
         setContent {
-            MainScreen()
+            val navController = rememberNavController()
+            PlaylistHost(navController = navController)
         }
     }
 }
 
 @Composable
-fun MainScreen() {
+fun MainScreen(
+    onSearchClick: () -> Unit,
+    onSettingsClick: () -> Unit
+) {
     val context = LocalContext.current
 
     Column(
@@ -58,6 +66,7 @@ fun MainScreen() {
     ) {
         Text(
             text = stringResource(R.string.main_screen_name),
+
             color = colorResource(R.color.white),
 
             fontSize = 22.sp,
@@ -80,15 +89,13 @@ fun MainScreen() {
                 .padding(top = 8.dp, start = 16.dp, end = 16.dp)
                 .fillMaxSize(),
 
-                horizontalAlignment = Alignment.CenterHorizontally,
-                verticalArrangement = Arrangement.spacedBy(16.dp)
+            horizontalAlignment = Alignment.CenterHorizontally,
+            verticalArrangement = Arrangement.spacedBy(16.dp)
         ) {
             MenuItem(
                 text = stringResource(R.string.main_screen_find),
                 icon = Icons.Default.Search,
-                onClick = {
-                    context.startActivity(Intent(context, SearchActivity::class.java))
-                }
+                onClick = onSearchClick
             )
             MenuItem(
                 text = stringResource(R.string.main_screen_playlist),
@@ -107,9 +114,7 @@ fun MainScreen() {
             MenuItem(
                 text = stringResource(R.string.main_screen_settings),
                 icon = Icons.Default.Settings,
-                onClick = {
-                    context.startActivity(Intent(context, SettingsActivity::class.java))
-                }
+                onClick = onSettingsClick
             )
         }
     }
@@ -122,11 +127,11 @@ fun MenuItem(
     onClick: () -> Unit
 ) {
     Row(
-        // тут padding первой строчкой нельзя, а то неудобно кликать будет (padding не войдет в clickable-область)
         modifier = Modifier
             .fillMaxWidth()
             .clickable { onClick() }
             .height(40.dp),
+
         verticalAlignment = Alignment.CenterVertically
     ) {
         Icon(
@@ -142,6 +147,7 @@ fun MenuItem(
 
         Text(
             text = text,
+
             color = colorResource(R.color.main_text),
 
             fontSize = 22.sp,
@@ -154,7 +160,7 @@ fun MenuItem(
             imageVector = Icons.AutoMirrored.Filled.KeyboardArrowRight,
             contentDescription = null,
 
-            tint = colorResource(R.color.arrow),
+            tint = colorResource(R.color.fg_secondary),
 
             modifier = Modifier.size(24.dp)
         )
@@ -167,5 +173,5 @@ fun MenuItem(
 )
 @Composable
 fun PlaylistMakerScreenPreview() {
-    MainScreen()
+    MainScreen(onSearchClick = {}, onSettingsClick = {})
 }

@@ -1,4 +1,4 @@
-package com.practicum.playlist_maker_android_sazonenkodmitriy
+package com.practicum.playlist_maker_android_sazonenkodmitriy.ui.search
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -27,6 +27,8 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.practicum.playlist_maker_android_sazonenkodmitriy.R
+import com.practicum.playlist_maker_android_sazonenkodmitriy.ui.mainFont
 
 @Composable
 fun SearchScreen(onBackClick: () -> Unit) {

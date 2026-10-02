@@ -1,4 +1,4 @@
-package com.practicum.playlist_maker_android_sazonenkodmitriy
+package com.practicum.playlist_maker_android_sazonenkodmitriy.ui.settings
 
 import android.content.Intent
 import android.net.Uri
@@ -30,6 +30,8 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.practicum.playlist_maker_android_sazonenkodmitriy.R
+import com.practicum.playlist_maker_android_sazonenkodmitriy.ui.mainFont
 
 @Composable
 fun SettingsScreen(onBackClick: () -> Unit) {

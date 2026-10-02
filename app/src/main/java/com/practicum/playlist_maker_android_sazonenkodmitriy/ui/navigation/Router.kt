@@ -1,11 +1,14 @@
-package com.practicum.playlist_maker_android_sazonenkodmitriy
+package com.practicum.playlist_maker_android_sazonenkodmitriy.ui.navigation
 
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.navigation.NavController
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import com.practicum.playlist_maker_android_sazonenkodmitriy.ui.MainScreen
+import com.practicum.playlist_maker_android_sazonenkodmitriy.ui.Screen
+import com.practicum.playlist_maker_android_sazonenkodmitriy.ui.search.SearchScreen
+import com.practicum.playlist_maker_android_sazonenkodmitriy.ui.settings.SettingsScreen
 
 @Composable
 fun PlaylistHost(

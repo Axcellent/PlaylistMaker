@@ -54,8 +54,7 @@ fun PlaylistHost(
                     track ->
                         val trackJson = gson.toJson(track)
                         navController.navigate("details/$trackJson")
-                },
-                onBackClick = { navController.popBackStack() }
+                }
             )
         }
 

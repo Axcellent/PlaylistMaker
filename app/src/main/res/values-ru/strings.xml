@@ -1,12 +1,20 @@
 <resources>
     <string name="app_name">playlist-maker-android-SazonenkoDmitriy</string>
+
     <string name="main_screen_name">Playlist Maker </string>
     <string name="main_screen_find">Поиск</string>
     <string name="main_screen_playlist">Плейлисты</string>
     <string name="main_screen_favorite">Избранное</string>
     <string name="main_screen_settings">Настройки</string>
+
     <string name="search_screen_name">Поиск</string>
     <string name="search_hint">Поиск</string>
+    <string name="search_no_tracks_found">Треки не найдены :(</string>
+    <string name="search_check_connection">Проверьте подключение к WiFi</string>
+
+    <string name="details_track_name">Детали трека</string>
+    <string name="details_track_author">Исполнитель</string>
+
     <string name="settings_screen_name">Настройки</string>
     <string name="settings_dark_theme">Тёмная тема</string>
     <string name="settings_share">Поделиться приложением</string>

@@ -24,6 +24,7 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -51,18 +52,17 @@ import com.practicum.playlist_maker_android_sazonenkodmitriy.ui.view_model.Searc
 @Composable
 fun SearchScreen(
     searchViewModel: SearchViewModel,
-    navigateToDetailScreen: (Track) -> Unit,
-    onBackClick: () -> Unit
+    navigateToDetailScreen: (Track) -> Unit
 ) {
     val screenState by searchViewModel.searchScreenState.collectAsState()
-    var text by remember { mutableStateOf("") }
+    var text by rememberSaveable { mutableStateOf("") }
     val focusRequester = remember { FocusRequester() }
     val focusManager = LocalFocusManager.current
 
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .padding(horizontal = 16.dp)
+            .padding(start = 16.dp, end = 16.dp, bottom=8.dp)
     ) {
         OutlinedTextField(
             modifier = Modifier
@@ -139,8 +139,7 @@ private fun SearchResults(
         is SearchState.Success -> {
             val tracks = screenState.foundList
             if (tracks.isEmpty()) {
-                //InformerState(stringResource(R.string.no_tracks_found))
-                InformerState("no_tracks_found")
+                InformerState(stringResource(R.string.search_no_tracks_found))
             } else {
                 LazyColumn(modifier = modifier, verticalArrangement = Arrangement.spacedBy(16.dp)) {
                     items(tracks.size) { index ->
@@ -156,8 +155,7 @@ private fun SearchResults(
         is SearchState.Fail -> {
             InformerState(
                 titleText = screenState.error,
-                //subtitleText = stringResource(R.string.check_connection)
-                subtitleText = "check_connection"
+                subtitleText = stringResource(R.string.search_check_connection)
             )
         }
     }
@@ -166,8 +164,8 @@ private fun SearchResults(
 @Composable
 private fun InformerState(
     titleText: String,
-    subtitleText: String? = null,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    subtitleText: String? = null
 ) {
     Column(
         modifier = modifier

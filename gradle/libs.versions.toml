@@ -15,8 +15,10 @@ activityKtx = "1.13.0"
 constraintlayout = "2.1.4"
 ui = "1.12.1"
 navigationCompose = "2.10.2"
+koinAndroid = "4.1.0"
 
 [libraries]
+koin-android = { module = "io.insert-koin:koin-android", version.ref = "koinAndroid" }
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
 junit = { group = "junit", name = "junit", version.ref = "junit" }
 androidx-junit = { group = "androidx.test.ext", name = "junit", version.ref = "junitVersion" }

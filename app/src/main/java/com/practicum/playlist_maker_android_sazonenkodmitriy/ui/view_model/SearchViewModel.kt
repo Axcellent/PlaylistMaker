@@ -32,7 +32,6 @@ class SearchViewModel(
     fun searchTracks(query: String) {
         viewModelScope.launch {
             _searchScreenState.value = SearchState.Searching
-
             try {
                 val result = trackRepository.searchTracksContains(query)
                 if (result.isNotEmpty()) {
@@ -48,13 +47,5 @@ class SearchViewModel(
 
     fun clearSearch() {
         _searchScreenState.value = SearchState.Initial
-    }
-    companion object {
-        fun getViewModelFactory(): ViewModelProvider.Factory = viewModelFactory {
-            initializer {
-                val repository = (this[APPLICATION_KEY] as App).getTracksRepository()
-                SearchViewModel(repository)
-            }
-        }
     }
 }

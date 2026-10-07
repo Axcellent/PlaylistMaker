@@ -24,7 +24,7 @@ class TracksRepositoryImpl(
     override fun searchTracks(expression: String): List<Track> {
         val response = networkClient.doRequest(TracksSearchRequest(expression))
 
-        if (response.resultCode == 200) { // успешный запрос
+        if (response.resultCode == 200) {
             return (response as TracksSearchResponse).results.map {
                 val seconds = it.trackTimeMillis / 1000
                 val minutes = seconds / 60
@@ -68,8 +68,7 @@ class TracksRepositoryImpl(
     }
 
     override suspend fun loadTrackDetail(trackId: Long): Track {
-        delay(3000L)  // симулируем задержку сети
-        // Пока возвращаем тестовый трек
+        delay(3000L)
         return Track(
             id = trackId,
             trackName = "Test Track",
